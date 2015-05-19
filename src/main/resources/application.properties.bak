@@ -1,0 +1,13 @@
+#============================#
+#===== Database sttings =====#
+#============================#
+
+#oracle database settings //1.5 crm
+jdbc.driver=com.mysql.jdbc.Driver
+jdbc.url=jdbc\:mysql\://192.168.3.116\:3306/sys_platform?useUnicode\=true&characterEncoding\=utf8
+jdbc.username=sys
+jdbc.password=Biyu5YzU+6sxDRbmWEa3B2uUcImzDo0BuXjTlL505+/pTb+/0Oqd3ou1R6J8+9Fy3CYrM18nBDqf6wAaPgUGOg==
+
+#pool settings
+pool.minIdle=3
+pool.maxActive=20
