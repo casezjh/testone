@@ -4,12 +4,12 @@
   <parent>
 		<groupId>com.qida.base</groupId>
 		<artifactId>qida-base-parent</artifactId>
-		<version>4.2.0-SNAPSHOT</version>
+		<version>4.2.3-SNAPSHOT</version>
   </parent>
 
   <groupId>com.qida.serviceapp</groupId>
   <artifactId>qida-commons-serviceapp</artifactId>
-  <version>4.2.0-SNAPSHOT</version>
+  <version>4.2.3-SNAPSHOT</version>
   <packaging>jar</packaging>
 
   <name>qida-commons-serviceapp</name>
