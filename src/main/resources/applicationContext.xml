@@ -107,8 +107,8 @@
 			<tx:method name="import*" propagation="REQUIRED" read-only="false" />
 			<tx:method name="move*" propagation="REQUIRED" read-only="false" />
 			<tx:method name="do*" propagation="REQUIRED" read-only="false" />
-			<tx:method name="find*" propagation="SUPPORTS" />
-			<tx:method name="export*" propagation="SUPPORTS"/>
+			<tx:method name="find*" propagation="SUPPORTS" read-only="true"/>
+			<tx:method name="export*" propagation="SUPPORTS" read-only="true"/>
 		</tx:attributes>
 	</tx:advice>
 
