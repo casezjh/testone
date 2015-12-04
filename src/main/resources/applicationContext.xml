@@ -130,7 +130,7 @@
 	<bean id="smsProvider" class="com.qida.common.sms.kegao.KeGaoSmsProvider">
 		<property name="username" value="${sms.username}"></property>
 		<property name="password" value="${sms.password}"></property>
-		<property name="signature" value="${sms.signature}"></property>
+		<property name="signature" value="【企大课堂】"></property>
 	</bean>
 
 
