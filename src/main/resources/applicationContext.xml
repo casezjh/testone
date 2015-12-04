@@ -128,14 +128,11 @@
 	<!-- 短信模块模块配置 -->
 	<!-- ================================================================================== -->
 	<bean id="smsProvider" class="com.qida.common.sms.kegao.KeGaoSmsProvider">
-		<constructor-arg value="${smsUsername}" />
-        <constructor-arg value="${smsPassword}" />
-        <!--  
-        <constructor-arg value="${http.proxy.host}" />
-        <constructor-arg value="${http.proxy.port}" />
-        --> 
+		<property name="username"　value="${sms.username}" />
+		<property name="password"　value="${sms.password}"/>
+		<property name="signature" value="${sms.signature}"/>
 	</bean>
-	
+
 
 		
 	<!-- Production 环境 -->
