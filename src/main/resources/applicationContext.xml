@@ -128,9 +128,9 @@
 	<!-- 短信模块模块配置 -->
 	<!-- ================================================================================== -->
 	<bean id="smsProvider" class="com.qida.common.sms.kegao.KeGaoSmsProvider">
-		<property name="username"　value="${sms.username}" />
-		<property name="password"　value="${sms.password}"/>
-		<property name="signature" value="${sms.signature}"/>
+		<property name="username" value="${sms.username}"></property>
+		<property name="password" value="${sms.password}"></property>
+		<property name="signature" value="${sms.signature}"></property>
 	</bean>
 
 
