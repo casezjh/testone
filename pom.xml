@@ -4,12 +4,12 @@
   <parent>
 		<groupId>com.qida.base</groupId>
 		<artifactId>qida-base-parent</artifactId>
-		<version>4.2.3-SNAPSHOT</version>
+		<version>4.3.0-SNAPSHOT</version>
   </parent>
 
   <groupId>com.qida.serviceapp</groupId>
   <artifactId>qida-commons-serviceapp</artifactId>
-  <version>4.2.3-SNAPSHOT</version>
+  <version>4.3.0-SNAPSHOT</version>
   <packaging>jar</packaging>
 
   <name>qida-commons-serviceapp</name>
@@ -29,11 +29,11 @@
     <dependency>
        <groupId>com.qida.userfeedback</groupId>
       <artifactId>qida-userfeedback-service-impl</artifactId>
-      <version>${qida.userfeedbackt.service.version}</version>
+      <version>${qida.userfeedback.service.version}</version>
     </dependency>
   	<!-- 移动APP版本服务接口 -->
     <dependency>
-       <groupId>com.qida.appversion</groupId>
+      <groupId>com.qida.appversion</groupId>
       <artifactId>qida-appversion-service-impl</artifactId>
       <version>${qida.appversion.service.version}</version>
     </dependency>
@@ -94,7 +94,7 @@
 	</dependency>   
 	
 	<dependency>
-		<groupId>com.qida.common</groupId>
+		<groupId>com.qida.messages</groupId>
 		<artifactId>qida-commons-messages-services-impl</artifactId>
 		<version>${qida.common.message.service.version}</version>
 	</dependency>
