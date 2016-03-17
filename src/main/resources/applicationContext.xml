@@ -153,10 +153,8 @@
 	<bean id="smsProvider" class="com.qida.common.sms.kegao.KeGaoSmsProvider">
 		<constructor-arg value="${smsUsername}" />
 		<constructor-arg value="${smsPassword}" />
-		<!--  
        	<constructor-arg value="${http.proxy.host}" />
         <constructor-arg value="${http.proxy.port}" />
-        --> 
  	</bean>
 
 
