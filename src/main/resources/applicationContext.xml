@@ -78,6 +78,29 @@
 		</constructor-arg>
 	</bean>
 	
+		<!-- ================================================================================== -->
+	<!-- 邮件发送组件配置 -->
+	<!-- ================================================================================== -->
+	<bean id="mailSender" class="com.qida.common.mail.impl.JavaMailSender">
+         <property name="host" value="${mail.smtp.host}"/> 
+         <property name="port" value="25"/> 
+         <property name="username" value="${mail.smtp.username}"/>  
+         <property name="password" value="${mail.smtp.password}"/>             
+         <property name="from" value="${mail.smtp.username}"/> 
+         <property name="proxyHost" value="${http.proxy.host}"/>
+         <property name="proxyPort" value="${http.proxy.port}"/>
+     </bean>  
+  
+  	<bean id="templateExecutor" class="com.qida.common.mail.impl.FreeMarkTemplateExecutor">
+  		<property name="templatePath" value="/template/mail"/>
+  	</bean>
+  
+    <bean id="mailService" class="com.qida.common.mail.impl.MailServiceImpl">  
+           <property name="mailSender" ref="mailSender"/>
+           <property name="syncSentable" value="true"/>
+           <property name="templateExecutor" ref="templateExecutor"/>
+    </bean>
+     
 	<bean class="com.qida.common.springutils.Springs" lazy-init="false"></bean>
 
 	<!-- 配置 JSR303 Bean Validator 定义 -->

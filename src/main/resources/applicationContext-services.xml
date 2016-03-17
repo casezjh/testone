@@ -40,4 +40,6 @@
 	<dubbo:service interface="com.qida.fileuploadtask.service.UploadTaskServic" ref="uploadTaskServicImpl"></dubbo:service>
 	
 	<dubbo:service interface="com.qida.common.services.MessageService" ref="messageServiceImpl" />
+	
+	<dubbo:service interface="com.qida.common.services.EmailService" ref="emailServiceImpl" />
 </beans>
