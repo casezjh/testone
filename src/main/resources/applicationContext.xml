@@ -87,8 +87,8 @@
          <property name="username" value="${mail.smtp.username}"/>  
          <property name="password" value="${mail.smtp.password}"/>             
          <property name="from" value="${mail.smtp.username}"/> 
-         <property name="proxyHost" value="${http.proxy.host}"/>
-         <property name="proxyPort" value="${http.proxy.port}"/>
+         <property name="proxyHost" value="${socket.proxy.host}"/>
+         <property name="proxyPort" value="${socket.proxy.port}"/>
      </bean>  
   
   	<bean id="templateExecutor" class="com.qida.common.mail.impl.FreeMarkTemplateExecutor">
