@@ -127,16 +127,26 @@
 	<!-- ================================================================================== -->
 	<!-- 短信模块模块配置 -->
 	<!-- ================================================================================== -->
-	<bean id="smsProvider" class="com.qida.common.sms.kegao.KeGaoSmsProvider">
+	<bean id="kegaoSmsProvider" class="com.qida.common.sms.kegao.KeGaoSmsProvider">
 		<constructor-arg value="${smsUsername}" />
-		<constructor-arg value="${smsPassword}" />
-		<!--  
+		<constructor-arg value="${smsPassword}" />  
        	<constructor-arg value="${http.proxy.host}" />
         <constructor-arg value="${http.proxy.port}" />
-        --> 
  	</bean>
-
-
+	<bean id="aliZhaoPinSmsProvider" class="com.qida.common.sms.alibaba.AliSmsProvider">
+		<constructor-arg value="${smsUsername}" />
+		<constructor-arg value="${smsPassword}" />		  
+       	<constructor-arg value="${http.proxy.host}" />
+        <constructor-arg value="${http.proxy.port}" />        
+ 	</bean>
+ 	<bean id="" class="com.qida.common.services.impl.SmsProviderRegister">
+ 		<property name="SmsProvider">
+ 			<map >
+ 				<entry key="kegao" value-ref="kegaoSmsProvider"/>
+           		<entry key="ali_zhaopin" value-ref="aliZhaoPinSmsProvider" />
+ 			</map>
+ 		</property>
+ 	</bean>
 		
 	<!-- Production 环境 -->
  	<beans profile="production">
