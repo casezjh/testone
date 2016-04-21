@@ -157,12 +157,12 @@
         <constructor-arg value="${http.proxy.port}" />
  	</bean>
 	<bean id="aliZhaoPinSmsProvider" class="com.qida.common.sms.alibaba.AliSmsProvider">
-		<constructor-arg value="${aliZhaoPinSmsUsername}" />
-		<constructor-arg value="${aliZhaoPinSmsPassword}" />		  
+		<constructor-arg value="${aliZhaoPinSmsAppkey}" />
+		<constructor-arg value="${aliZhaoPinSmsSecret}" />		  
        	<constructor-arg value="${http.proxy.host}" />
         <constructor-arg value="${http.proxy.port}" />        
  	</bean>
- 	<bean id="" class="com.qida.common.services.impl.SmsProviderRegister">
+ 	<bean id="smsProviderRegister" class="com.qida.common.services.impl.SmsProviderRegister">
  		<property name="SmsProvider">
  			<map >
  				<entry key="kegao" value-ref="kegaoSmsProvider"/>
