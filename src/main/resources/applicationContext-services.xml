@@ -43,6 +43,6 @@
 	
 	<dubbo:service interface="com.qida.common.services.EmailService" ref="emailServiceImpl" />
 	
-	<dubbo:service interface="com.qida.filepersistent.service.OssCompanySetService" ref="ossCompanyServiceImpl"/>
+	<dubbo:service interface="com.qida.filepersistent.service.OssCompanyService" ref="ossCompanyServiceImpl"/>
 	<dubbo:service interface="com.qida.filepersistent.service.BucketCompanyService" ref="bucketCompanyServiceImpl"/>
 </beans>
