@@ -8,10 +8,11 @@
 	<description>服务配置 </description>
     <!-- consumer application name -->
     <dubbo:application name="qida-clm-common-serviceapp"  />
-    <dubbo:provider filter="InvocationRpcFilter"></dubbo:provider>
+    <dubbo:provider protocol="dubbo" filter="InvocationRpcFilter"></dubbo:provider>
     <dubbo:consumer timeout="15000"/>
     <dubbo:registry address="zookeeper://${zookeeper.addr}" />
-    <dubbo:protocol name="dubbo" port="${commons.dubbo.port}" register="${service.register}"/>  
+    <dubbo:protocol name="dubbo" port="${commons.dubbo.port}" register="${service.register}"/> 
+    <dubbo:protocol name="hessian" port="${commons.hessian.port}" server="jetty" register="${service.register}"/>  
     <dubbo:monitor protocol="registry"/>
     <!-- 基础数据服务 -->
     <dubbo:service interface="com.qida.systembasedata.service.AreaService" ref="areaServiceImpl"></dubbo:service>
@@ -44,5 +45,5 @@
 	<dubbo:service interface="com.qida.common.services.EmailService" ref="emailServiceImpl" />
 	
 	<dubbo:service interface="com.qida.filepersistent.service.OssCompanyService" ref="ossCompanyServiceImpl"/>
-	<dubbo:service interface="com.qida.filepersistent.service.BucketCompanyService" ref="bucketCompanyServiceImpl"/>
+	<dubbo:service interface="com.qida.filepersistent.service.BucketCompanyService" ref="bucketCompanyServiceImpl" protocol="hessian"/>
 </beans>

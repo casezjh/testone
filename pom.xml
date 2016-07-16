@@ -98,7 +98,24 @@
 		<artifactId>qida-commons-messages-services-impl</artifactId>
 		<version>${qida.common.message.service.version}</version>
 	</dependency>
-	  	 
+	<!-- hessian protocol -->
+  	<!-- 使用自己修改过源码的 -->
+	<dependency>
+		<groupId>com.caucho</groupId>
+		<artifactId>hessian</artifactId>
+		<version>${hessian.version}</version>
+	</dependency>
+	<!-- Jetty -->
+	<dependency>
+		<groupId>org.mortbay.jetty</groupId>
+		<artifactId>jetty</artifactId>
+		<version>6.1.26</version>
+	</dependency>
+	<dependency>
+		<groupId>javax.servlet</groupId>
+		<artifactId>servlet-api</artifactId>
+	</dependency>
+	<!-- hessian protocol -->	  	 
   </dependencies>
   <build>
   		<finalName>qida-commons-serviceapp</finalName>
