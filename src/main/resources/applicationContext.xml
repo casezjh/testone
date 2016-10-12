@@ -55,6 +55,13 @@
 	<!-- 使用Annotation自动注册Bean，解决事物失效问题：在主容器中不扫描@Controller注解，在SpringMvc中只扫描@Controller注解。  -->
 	<context:component-scan base-package="com.qida"/><!-- base-package 如果多个，用“,”分隔 -->
 	
+	<!-- 
+	==================================================================================
+	文件服务器客户端模块配置
+	==================================================================================
+	 -->
+	<!-- 旧代码使用fastdfs,新代码使用oss -->
+	<!-- 
 	<bean id="trackerServerPool" class="com.qida.fileserver.fastdfs.pool.TrackerServerPool" lazy-init="false" init-method="init" destroy-method="destroy">
 		<property name="port" value="${fs.server.port}"/>
 		<property name="size" value="${fs.pool.size}"/>
@@ -68,14 +75,20 @@
 		<property name="delayTimes" value="${fs.heartbeat.delaytimes}" />
 		<property name="periodTimes" value="${fs.heartbeat.periodtimes}" />
 	</bean>
-	
-	<!-- ================================================================================== -->
-	<!-- 文件服务器客户端模块配置 -->
-	<!-- ================================================================================== -->
-	<bean id="fileServer" class="com.qida.fileserver.fastdfs.FastdfsFileServer">
+
+	<bean id="fileServer" class="com.qida.fileserver.fastdfs.FastdfsFileServerImpl">
 		<constructor-arg>
 			<ref bean="trackerServerPool"/>
 		</constructor-arg>
+	</bean>
+	 -->
+	 
+	<!-- endpointInternal该参数只需要正式环境上的zk提供即可,开发和测试都不需要 -->
+	<bean id="fileServer" class="com.qida.fileserver.oss.OSSFileServerImpl">
+		<constructor-arg name="endpoint" value="${oss.endpoint}"/>
+		<constructor-arg name="accessKeyId" value="${oss.accessKeyId}"/> 
+		<constructor-arg name="accessKeySecret" value="${oss.accessKeySecret}" />
+		<constructor-arg name="bucketName" value="${oss.bucketName}" />
 	</bean>
 	
 		<!-- ================================================================================== -->
