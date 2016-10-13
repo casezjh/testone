@@ -9,7 +9,6 @@
 
   <groupId>com.qida.serviceapp</groupId>
   <artifactId>qida-commons-serviceapp</artifactId>
-  <version>5.0.0-SNAPSHOT</version>
   <packaging>jar</packaging>
 
   <name>qida-commons-serviceapp</name>
@@ -116,11 +115,6 @@
 		<artifactId>servlet-api</artifactId>
 	</dependency>
 	<!-- hessian protocol -->
-		<dependency>
-			<groupId>org.jdom</groupId>
-			<artifactId>jdom</artifactId>
-			<version>1.1</version>
-		</dependency>
   </dependencies>
   <build>
   		<finalName>qida-commons-serviceapp</finalName>
