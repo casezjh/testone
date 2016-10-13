@@ -60,7 +60,7 @@
 	文件服务器客户端模块配置
 	==================================================================================
 	 -->
-	<!-- 旧代码使用fastdfs,新代码使用oss -->
+	
 	<!-- 
 	<bean id="trackerServerPool" class="com.qida.fileserver.fastdfs.pool.TrackerServerPool" lazy-init="false" init-method="init" destroy-method="destroy">
 		<property name="port" value="${fs.server.port}"/>
@@ -75,14 +75,14 @@
 		<property name="delayTimes" value="${fs.heartbeat.delaytimes}" />
 		<property name="periodTimes" value="${fs.heartbeat.periodtimes}" />
 	</bean>
-
-	<bean id="fileServer" class="com.qida.fileserver.fastdfs.FastdfsFileServerImpl">
+	<bean id="fileServer" class="com.qida.fileserver.fastdfs.FastdfsFileServer">
 		<constructor-arg>
 			<ref bean="trackerServerPool"/>
 		</constructor-arg>
 	</bean>
 	 -->
 	 
+	 <!-- 旧代码使用fastdfs,新代码使用oss -->
 	<!-- endpointInternal该参数只需要正式环境上的zk提供即可,开发和测试都不需要 -->
 	<bean id="fileServer" class="com.qida.fileserver.oss.OSSFileServerImpl">
 		<constructor-arg name="endpoint" value="${oss.endpoint}"/>
