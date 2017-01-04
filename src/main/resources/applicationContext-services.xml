@@ -47,6 +47,5 @@
 	<dubbo:service interface="com.qida.filepersistent.service.OssCompanyService" ref="ossCompanyServiceImpl"/>
 	<dubbo:service interface="com.qida.filepersistent.service.BucketCompanyService" ref="bucketCompanyServiceImpl" protocol="hessian"/>
 	
-	<!-- 课程列表接口依赖 -->
- 	<dubbo:reference id="courseManageService" interface="com.qida.clm.cmp.res.course.service.CourseManageService" /> 
+	 
 </beans>
