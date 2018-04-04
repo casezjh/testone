@@ -1,0 +1,7 @@
+stages:
+  - compile
+
+compile:
+ stage: compile
+ script:
+   - mvn clean install -U  deploy  -Dmaven.test.skip=true -f ./pom.xml
