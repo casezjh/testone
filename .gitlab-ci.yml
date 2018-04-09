@@ -5,3 +5,12 @@ compile:
  stage: compile
  script:
    - mvn clean install -U  deploy  -Dmaven.test.skip=true -f ./pom.xml
+   - rm -rf /app/project/"$PROJECT_NAME"
+   - mkdir -p /app/project/"$PROJECT_NAME"
+   - cp -rf ./target/lib /app/project/"$PROJECT_NAME"/
+   - cp -rf ./target/"$PROJECT_NAME".jar /app/project/"$PROJECT_NAME"/
+
+deploy:
+ stage: deploy
+ script:
+   - python /app/script/deploy_b2b_serviceapp.py "$PROJECT_NAME"
