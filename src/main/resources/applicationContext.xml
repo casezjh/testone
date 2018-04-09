@@ -183,6 +183,10 @@
        	<constructor-arg value="${http.proxy.host}" />
         <constructor-arg value="${http.proxy.port}" />        
  	</bean>
+ 	<bean id="smsProvider" class="com.qida.common.sms.aliyun.AliyunSmsProvider">
+		<constructor-arg value="${aliyun.sms.accesskeyId}" />
+		<constructor-arg value="${aliyun.sms.accessKeySecret}" />
+ 	</bean>	
  	<bean id="smsProviderRegister" class="com.qida.common.services.impl.SmsProviderRegister">
  		<property name="SmsProvider">
  			<map >
