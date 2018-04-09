@@ -1,6 +1,7 @@
 stages:
   - compile
-  - deploy
+  - deploy_goodmedicine
+  - deploy_b2b
 
 compile:
  stage: compile
@@ -11,7 +12,12 @@ compile:
    - cp -rf ./target/lib /app/project/"$PROJECT_NAME"/
    - cp -rf ./target/"$PROJECT_NAME".jar /app/project/"$PROJECT_NAME"/
 
-deploy:
- stage: deploy
+deploy_goodmedicine:
+ stage: deploy_goodmedicine
+ script:
+   - python /app/script/deploy_goodmedicine_serviceapp.py "$PROJECT_NAME"
+
+deploy_b2b:
+ stage: deploy_b2b
  script:
    - python /app/script/deploy_b2b_serviceapp.py "$PROJECT_NAME"
