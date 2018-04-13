@@ -11,14 +11,14 @@ build:
    - cp -rf ./target/lib /app/project/"$PROJECT_NAME"/
    - cp -rf ./target/"$PROJECT_NAME".jar /app/project/"$PROJECT_NAME"/
 
-deploy_goodmedicine:
- stage: deploy
- when: manual
- script:
-   - python /app/script/deploy_goodmedicine_serviceapp.py "$PROJECT_NAME"
-
 deploy_b2b:
  stage: deploy
  when: manual
  script:
    - python /app/script/deploy_b2b_serviceapp.py "$PROJECT_NAME"
+
+deploy_goodmedicine:
+ stage: deploy
+ when: manual
+ script:
+   - python /app/script/deploy_goodmedicine_serviceapp.py "$PROJECT_NAME"
