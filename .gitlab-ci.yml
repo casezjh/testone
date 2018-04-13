@@ -1,10 +1,9 @@
 stages:
-  - compile
-  - deploy_goodmedicine
-  - deploy_b2b
+  - build
+  - deploy
 
-compile:
- stage: compile
+build:
+ stage: build
  script:
    - mvn clean install -U  deploy  -Dmaven.test.skip=true -f ./pom.xml
    - rm -rf /app/project/"$PROJECT_NAME"
@@ -13,11 +12,13 @@ compile:
    - cp -rf ./target/"$PROJECT_NAME".jar /app/project/"$PROJECT_NAME"/
 
 deploy_goodmedicine:
- stage: deploy_goodmedicine
+ stage: deploy
+ when: manual
  script:
    - python /app/script/deploy_goodmedicine_serviceapp.py "$PROJECT_NAME"
 
 deploy_b2b:
- stage: deploy_b2b
+ stage: deploy
+ when: manual
  script:
    - python /app/script/deploy_b2b_serviceapp.py "$PROJECT_NAME"
