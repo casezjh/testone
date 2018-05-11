@@ -1,6 +1,7 @@
 stages:
   - build
-  - deploy
+  - deploy_test
+  - deploy_production
 
 build:
  stage: build
@@ -11,14 +12,14 @@ build:
    - cp -rf ./target/lib /app/project/"$PROJECT_NAME"/
    - cp -rf ./target/"$PROJECT_NAME".jar /app/project/"$PROJECT_NAME"/
 
-deploy_b2b:
- stage: deploy
+deploy_test_b2b:
+ stage: deploy_test
  when: manual
  script:
    - python /app/script/deploy_b2b_serviceapp.py "$PROJECT_NAME"
-
-deploy_goodmedicine:
- stage: deploy
+   
+deploy_production_tyjr:
+ stage: deploy_production
  when: manual
  script:
-   - python /app/script/deploy_goodmedicine_serviceapp.py "$PROJECT_NAME"
+   - python /production/script/production_tyjr_serviceapp.py "$PROJECT_NAME"
