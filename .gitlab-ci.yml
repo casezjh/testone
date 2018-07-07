@@ -11,15 +11,15 @@ build:
    - mkdir -p /app/project/"$PROJECT_NAME"
    - cp -rf ./target/lib /app/project/"$PROJECT_NAME"/
    - cp -rf ./target/"$PROJECT_NAME".jar /app/project/"$PROJECT_NAME"/
-
+   
 deploy_test_b2b:
  stage: deploy_test
  when: manual
  script:
-   - python /app/script/deploy_b2b_serviceapp.py "$PROJECT_NAME"
+   - python /app/script/offline/deploy_b2b_serviceapp.py "$PROJECT_NAME"
    
 deploy_production_tyjr:
  stage: deploy_production
  when: manual
  script:
-   - python /production/script/production_tyjr_serviceapp.py "$PROJECT_NAME"
+   - python /app/script/online/deploy_tyjr_serviceapp.py "$PROJECT_NAME"
