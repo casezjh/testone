@@ -97,6 +97,7 @@
 		<artifactId>qida-commons-messages-services-impl</artifactId>
 		<version>${qida.common.message.service.version}</version>
 	</dependency>
+
 	<!-- hessian protocol -->
   	<!-- 使用自己修改过源码的 -->
 	<dependency>

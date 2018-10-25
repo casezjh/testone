@@ -18,6 +18,15 @@
     <dubbo:service interface="com.qida.systembasedata.service.AreaService" ref="areaServiceImpl"></dubbo:service>
     <dubbo:service interface="com.qida.systembasedata.service.DomainService" ref="domainServiceImpl"></dubbo:service>
     <dubbo:service interface="com.qida.systembasedata.service.IndustryService" ref="industryServiceImpl"></dubbo:service>
+    <dubbo:service interface="com.qida.systembasedata.service.SysEducationCategoryService" ref="sysEducationCategoryImpl"></dubbo:service>
+    <dubbo:service interface="com.qida.systembasedata.service.SysHopCategoryService" ref="sysHopCategoryImpl"></dubbo:service>
+    <dubbo:service interface="com.qida.systembasedata.service.SysPositionCategoryService" ref="sysPositionCategoryImpl"></dubbo:service>
+    <dubbo:service interface="com.qida.systembasedata.service.SysPostCategoryService" ref="sysPostCategoryImpl"></dubbo:service>
+    <dubbo:service interface="com.qida.systembasedata.service.SysTeamNumberCategoryService" ref="sysTeamNumberCategoryImpl"></dubbo:service>
+    <dubbo:service interface="com.qida.systembasedata.service.SysWorkYearsCategoryService" ref="sysWorkYearsCategoryImpl"></dubbo:service>
+    <dubbo:service interface="com.qida.systembasedata.service.SysLearningTimeCategoryService" ref="sysLearningTimeCategoryImpl"></dubbo:service>
+    
+    
     <dubbo:service interface="com.qida.attachment.service.AttachmentService" ref="attachmentServiceImpl"></dubbo:service>
     <dubbo:service interface="com.qida.attachment.service.BigTextStoreService" ref="bigTextStoreServiceImpl"></dubbo:service>
 	<!-- 系统参数服务 -->
@@ -47,5 +56,4 @@
 	<dubbo:service interface="com.qida.filepersistent.service.OssCompanyService" ref="ossCompanyServiceImpl"/>
 	<dubbo:service interface="com.qida.filepersistent.service.BucketCompanyService" ref="bucketCompanyServiceImpl" protocol="hessian"/>
 	
-	 
 </beans>
