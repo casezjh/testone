@@ -43,6 +43,21 @@
       <version>4.3.0-SNAPSHOT</version>
     </dependency>
     <dependency>
+      <groupId>com.qida.system.basedata</groupId>
+      <artifactId>qida-systembasedata-dao</artifactId>
+      <version>4.3.0-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>com.qida.system.basedata</groupId>
+      <artifactId>qida-systembasedata-dao-impl</artifactId>
+      <version>4.3.0-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>com.qida.system.basedata</groupId>
+      <artifactId>qida-systembasedata-entity</artifactId>
+      <version>4.3.0-SNAPSHOT</version>
+    </dependency>
+    <dependency>
       <groupId>com.qida.system.parameter</groupId>
       <artifactId>qida-systemparameter-service-impl</artifactId>
       <version>${qida.systemparameter.service.version}</version>
