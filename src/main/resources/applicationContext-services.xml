@@ -27,6 +27,16 @@
     <dubbo:service interface="com.qida.systembasedata.service.SysLearningTimeCategoryService" ref="sysLearningTimeCategoryImpl"></dubbo:service>
     
     
+    <!-- 官网维护 -->
+    <dubbo:service interface="com.qida.manage.service.GatewayCustomerInfoService" ref="gatewayCustomerInfoServiceImpl"></dubbo:service>
+    <dubbo:service interface="com.qida.manage.service.GatewayEnterpriseCommentService" ref="gatewayEnterpriseCommentServiceImpl"></dubbo:service>
+    <dubbo:service interface="com.qida.manage.service.GatewayInformationService" ref="gatewayInformationServiceImpl"></dubbo:service>
+    <dubbo:service interface="com.qida.manage.service.GatewayInformationTypeService" ref="gatewayInformationTypeServiceImpl"></dubbo:service>
+    <dubbo:service interface="com.qida.manage.service.GatewaySiteDynamicService" ref="gatewaySiteDynamicServiceImpl"></dubbo:service>
+    
+    
+    
+    
     <dubbo:service interface="com.qida.attachment.service.AttachmentService" ref="attachmentServiceImpl"></dubbo:service>
     <dubbo:service interface="com.qida.attachment.service.BigTextStoreService" ref="bigTextStoreServiceImpl"></dubbo:service>
 	<!-- 系统参数服务 -->
