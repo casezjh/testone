@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:aop="http://www.springframework.org/schema/aop" xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd"
+	default-lazy-init="true">
+
+	<description>Spring Configuration</description>
+	
+    <!-- 加载配置属性文件 -->
+	<!-- <context:property-placeholder ignore-unresolvable="true" location="classpath:/application.properties" /> -->
+	
+	<!-- 加载zk之外的配置，优先级最高 -->
+	<bean id="propConfigurer"
+		class="com.qida.common.configuration.PropertyPlaceholderConfigurer">
+		<property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE" />
+		<property name="ignoreResourceNotFound" value="true" />
+		<property name="ignoreUnresolvablePlaceholders" value="true" />
+		<property name="order" value="1" />
+		<property name="locations">
+			<list>
+				<!-- 标准配置 -->
+				<value>classpath*:/application-lecturer.properties</value>
+				<!-- 服务器生产环境配置 -->
+				<value>file:c:/application-lecturer.properties</value>
+				<value>file:./application-lecturer.properties</value>
+				<value>file:/app/public/config/application-lecturer.properties</value>
+			</list>
+		</property>
+	</bean>
+	
+	
+	<bean id="zkPropConfigurer" class="com.qida.common.configuration.ZookeeperConfigurer">
+		<property name="ignoreUnresolvablePlaceholders" value="true" />
+		<property name="order" value="2" />
+		<property name="location">
+			<bean class="com.qida.common.configuration.ZookeeperResource" >
+				 <constructor-arg>
+			        <list>
+						<!-- 标准配置 -->
+						<value>classpath*:/application-lecturer.properties</value>
+						<!-- 服务器生产环境配置 -->
+						<value>file:c:/application-lecturer.properties</value>
+						<value>file:./application-lecturer.properties</value>
+						<value>file:/app/public/config/application-lecturer.properties</value>
+					</list>
+			    </constructor-arg>   
+			</bean>
+		</property>
+	</bean>  
+		
+	<!-- 使用Annotation自动注册Bean，解决事物失效问题：在主容器中不扫描@Controller注解，在SpringMvc中只扫描@Controller注解。  -->
+	<context:component-scan base-package="com.qida"/><!-- base-package 如果多个，用“,”分隔 -->
+	
+	<!-- 
+	==================================================================================
+	文件服务器客户端模块配置
+	==================================================================================
+	 -->
+	
+	<!-- 
+	<bean id="trackerServerPool" class="com.qida.fileserver.fastdfs.pool.TrackerServerPool" lazy-init="false" init-method="init" destroy-method="destroy">
+		<property name="port" value="${fs.server.port}"/>
+		<property name="size" value="${fs.pool.size}"/>
+		<property name="waitTimes" value="${fs.wait.times}"/>
+		<property name="connectTimeout" value="${fs.connect.timeout}"/>
+		<property name="networkTimeout" value="${fs.network.timeout}"/>
+		<property name="charset" value="${fs.charset}"/>
+		<property name="secretKey" value="${fs.secret.key}"/>
+		<property name="antiStealToken" value="${fs.antiateal.token}"/>
+		<property name="trackerServer" value="${fs.server}"/>
+		<property name="delayTimes" value="${fs.heartbeat.delaytimes}" />
+		<property name="periodTimes" value="${fs.heartbeat.periodtimes}" />
+	</bean>
+	<bean id="fileServer" class="com.qida.fileserver.fastdfs.FastdfsFileServer">
+		<constructor-arg>
+			<ref bean="trackerServerPool"/>
+		</constructor-arg>
+	</bean>
+	 -->
+	 
+	 <!-- 旧代码使用fastdfs,新代码使用oss -->
+	<!-- endpointInternal该参数只需要正式环境上的zk提供即可,开发和测试都不需要 -->
+	<bean id="fileServer" class="com.qida.fileserver.oss.OSSFileServerImpl">
+		<constructor-arg name="endpoint" value="${oss.endpoint}"/>
+		<constructor-arg name="accessKeyId" value="${oss.accessKeyId}"/> 
+		<constructor-arg name="accessKeySecret" value="${oss.accessKeySecret}" />
+		<constructor-arg name="bucketName" value="${oss.bucketName}" />
+	</bean>
+	
+		<!-- ================================================================================== -->
+	<!-- 邮件发送组件配置 -->
+	<!-- ================================================================================== -->
+	<bean id="mailSender" class="com.qida.common.mail.impl.JavaMailSender">
+         <property name="host" value="${mail.smtp.host}"/> 
+         <property name="port" value="25"/> 
+         <property name="username" value="${mail.smtp.username}"/>  
+         <property name="password" value="${mail.smtp.password}"/>             
+         <property name="from" value="${mail.smtp.username}"/> 
+         <property name="proxyHost" value="${socket.proxy.host}"/>
+         <property name="proxyPort" value="${socket.proxy.port}"/>
+     </bean>  
+  
+  	<bean id="templateExecutor" class="com.qida.common.mail.impl.FreeMarkTemplateExecutor">
+  		<property name="templatePath" value="/template/mail"/>
+  	</bean>
+  
+    <bean id="mailService" class="com.qida.common.mail.impl.MailServiceImpl">  
+           <property name="mailSender" ref="mailSender"/>
+           <property name="syncSentable" value="true"/>
+           <property name="templateExecutor" ref="templateExecutor"/>
+    </bean>
+     
+	<bean class="com.qida.common.springutils.Springs" lazy-init="false"></bean>
+
+	<!-- 配置 JSR303 Bean Validator 定义 -->
+	<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" />
+
+	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">  
+        <property name="basenames">  
+            <list>  
+				<value>com.qida.systembasedata.service.serviceerror</value>
+				<value>com.qida.filepersistent.serviceerror</value>
+            </list>  
+        </property>  
+    </bean>
+	<!-- 事务管理器配置,单数据源事务 -->
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
+	<!-- 定义事务 -->
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="delete*" propagation="REQUIRED" read-only="false" />
+			<tx:method name="create*" propagation="REQUIRED" read-only="false" />
+			<tx:method name="update*" propagation="REQUIRED" read-only="false" />
+			<tx:method name="save*" propagation="REQUIRED" read-only="false" />
+			<tx:method name="import*" propagation="REQUIRED" read-only="false" />
+			<tx:method name="move*" propagation="REQUIRED" read-only="false" />
+			<tx:method name="do*" propagation="REQUIRED" read-only="false" />
+			
+			<tx:method name="export*" read-only="true"/>
+			<tx:method name="get*" read-only="true" />  
+            <tx:method name="find*" read-only="true" />  
+            <tx:method name="load*" read-only="true" />  
+            <tx:method name="search*" read-only="true" />  
+            <tx:method name="select*" read-only="true" />  
+            <tx:method name="query*" read-only="true" />
+            <tx:method name="list*" read-only="true" />    
+            <tx:method name="*" propagation="REQUIRED" read-only="false" />  
+		</tx:attributes>
+	</tx:advice>
+
+	<!-- AOP配置 -->
+	<aop:config>
+		<aop:pointcut id="serviceCuts" expression="execution(* com.qida..*ServiceImpl.*(..))" />  
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="serviceCuts" />
+	</aop:config>
+	
+	<bean id="passwordCallback" class="com.qida.common.jdbc.util.JdbcPasswordCallback">
+		<property name="password" value="${commons.jdbc.password}" />
+	</bean>
+	
+	<bean id="messageServiceImpl" class="com.qida.common.services.impl.MessageServiceImpl"/>
+	
+	<!-- ================================================================================== -->
+	<!-- 短信模块模块配置 -->
+	<!-- ================================================================================== -->
+	<bean id="kegaoSmsProvider" class="com.qida.common.sms.kegao.KeGaoSmsProvider">
+		<constructor-arg value="${smsUsername}" />
+		<constructor-arg value="${smsPassword}" />
+       	<constructor-arg value="${http.proxy.host}" />
+        <constructor-arg value="${http.proxy.port}" />
+ 	</bean>
+	<bean id="aliZhaoPinSmsProvider" class="com.qida.common.sms.alibaba.AliSmsProvider">
+		<constructor-arg value="${aliZhaoPinSmsAppkey}" />
+		<constructor-arg value="${aliZhaoPinSmsSecret}" />		  
+       	<constructor-arg value="${http.proxy.host}" />
+        <constructor-arg value="${http.proxy.port}" />        
+ 	</bean>
+ 	<bean id="smsProvider" class="com.qida.common.sms.aliyun.AliyunSmsProvider">
+		<constructor-arg value="${aliyun.sms.accesskeyId}" />
+		<constructor-arg value="${aliyun.sms.accessKeySecret}" />
+ 	</bean>	
+ 	<bean id="smsProviderRegister" class="com.qida.common.services.impl.SmsProviderRegister">
+ 		<property name="SmsProvider">
+ 			<map >
+ 				<entry key="kegao" value-ref="kegaoSmsProvider"/>
+           		<entry key="ali_zhaopin" value-ref="aliZhaoPinSmsProvider" />
+ 			</map>
+ 		</property>
+ 	</bean>
+		
+	<!-- Production 环境 -->
+ 	<beans profile="production">
+ 	    <!-- 数据源配置, 使用 BoneCP 数据库连接池 -->
+		<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close"> 
+		    <!-- 数据源驱动类可不写，Druid默认会自动根据URL识别DriverClass -->
+		    <property name="driverClassName" value="${commons.jdbc.driver}" />
+		    
+			<!-- 基本属性 url、user、password -->
+			<property name="url" value="${commons.jdbc.url}" />
+			<property name="username" value="${commons.jdbc.username}" />
+			<!--<property name="password" value="${commons.jdbc.password}" />-->
+			
+			<!-- 配置初始化大小、最小、最大 -->
+			<property name="initialSize" value="${commons.pool.minIdle}" />
+			<property name="minIdle" value="${commons.pool.minIdle}" /> 
+			<property name="maxActive" value="${commons.pool.maxActive}" />
+			
+			<!-- 配置获取连接等待超时的时间 -->
+			<property name="maxWait" value="60000" />
+			
+			<!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
+			<property name="timeBetweenEvictionRunsMillis" value="60000" />
+			
+			<!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
+			<property name="minEvictableIdleTimeMillis" value="300000" />
+			
+			<property name="validationQuery" value="SELECT 'x' from dual" />
+			<property name="testWhileIdle" value="true" />
+			<property name="testOnBorrow" value="false" />
+			<property name="testOnReturn" value="false" />
+			
+			<!-- 打开PSCache，并且指定每个连接上PSCache的大小（Oracle使用）
+			<property name="poolPreparedStatements" value="true" />
+			<property name="maxPoolPreparedStatementPerConnectionSize" value="20" /> -->
+			
+			<!-- 配置监控统计拦截的filters -->
+		    <property name="filters" value="stat" /> 
+		    
+		    <property name="passwordCallback" ref="passwordCallback"/>
+		</bean>
+		
+		<!-- MyBatis配置 -->
+		<bean id="sqlSessionFactory"
+			class="com.qida.common.mybatis.SqlSessionFactoryBean">
+			<property name="dataSource" ref="dataSource" />
+			<property name="configLocation" value="classpath:mybatis-config-mysql.xml" />
+			<!--  需要从jar中加载GlobalMapper.xml -->
+			<property name="mapperLocations">
+	            <list>
+	                <value>classpath*:/com/qida/**/mysql/*Mapper.xml</value>
+	                <value>classpath*:/com/qida/common/dao/GlobalMapper.xml</value>
+	            </list>
+        	</property>
+		</bean>
+    </beans>
+	
+	
+</beans>
